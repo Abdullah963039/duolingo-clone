@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { Loader } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import { SidebarItem } from "./sidebar-item";
-import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
-import { Loader } from "lucide-react";
 
 interface Props {
   className?: string;
