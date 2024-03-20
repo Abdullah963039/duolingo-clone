@@ -5,39 +5,17 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 
 import * as schema from "@/db/schema";
+import {
+  COURSES,
+  LESSONS,
+  UNITS,
+  CHALLENGES,
+  CHALLENGE_OPTIONS,
+} from "@/db/dummy";
 
 const sql = postgres(process.env.DATABASE_URL!);
 
 const db = drizzle(sql, { schema });
-
-// Courses
-const COURSES = [
-  {
-    id: 1,
-    title: "Spanish",
-    imageSrc: "/es.svg",
-  },
-  {
-    id: 2,
-    title: "French",
-    imageSrc: "/fr.svg",
-  },
-  {
-    id: 3,
-    title: "Italian",
-    imageSrc: "/it.svg",
-  },
-  {
-    id: 4,
-    title: "Japanese",
-    imageSrc: "/jp.svg",
-  },
-  {
-    id: 5,
-    title: "Croatian",
-    imageSrc: "/hr.svg",
-  },
-];
 
 const main = async () => {
   try {
@@ -45,8 +23,17 @@ const main = async () => {
 
     await db.delete(schema.courses);
     await db.delete(schema.userProgress);
+    await db.delete(schema.units);
+    await db.delete(schema.lessons);
+    await db.delete(schema.challenges);
+    await db.delete(schema.challengeOptions);
+    await db.delete(schema.challengeProgress);
 
     await db.insert(schema.courses).values(COURSES);
+    await db.insert(schema.units).values(UNITS);
+    await db.insert(schema.lessons).values(LESSONS);
+    await db.insert(schema.challenges).values(CHALLENGES);
+    await db.insert(schema.challengeOptions).values(CHALLENGE_OPTIONS);
 
     console.log("Seeding finish");
   } catch (error) {
