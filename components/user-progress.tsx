@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
 import { InfinityIcon } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
+import { Course } from "@/types";
+
 interface Props {
-  activeCourse: { title: string; imageSrc: string }; // TODO: Replace with database types
+  activeCourse: Course;
   hearts: number;
   points: number;
   hasActiveSubscription: boolean;
