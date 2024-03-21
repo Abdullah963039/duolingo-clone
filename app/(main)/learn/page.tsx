@@ -3,21 +3,31 @@ import { redirect } from "next/navigation";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
-import { getUnits, getUserProgress } from "@/db/queries";
+import {
+  getCouresProgress,
+  getLessonPercentage,
+  getUnits,
+  getUserProgress,
+} from "@/db/queries";
 
 import { Header } from "./_components/header";
 import { Unit } from "./_components/unit";
 
 export default async function LearnPage() {
   const unitsPromise = getUnits();
+  const courseProgressPromise = getCouresProgress();
+  const lessonPercentagePromise = getLessonPercentage();
   const userProgressPromise = getUserProgress();
 
-  const [userProgress, units] = await Promise.all([
-    userProgressPromise,
-    unitsPromise,
-  ]);
+  const [userProgress, units, courseProgress, lessonPercentage] =
+    await Promise.all([
+      userProgressPromise,
+      unitsPromise,
+      courseProgressPromise,
+      lessonPercentagePromise,
+    ]);
 
-  if (!userProgress || !userProgress.activeCourse) {
+  if (!userProgress || !userProgress.activeCourse || !courseProgress) {
     redirect("/courses");
   }
 
@@ -36,8 +46,8 @@ export default async function LearnPage() {
         {units.map((unit) => (
           <div key={unit.id} className="mb-10">
             <Unit
-              activeLessonPercentage={0}
-              activeLesson={undefined}
+              activeLessonPercentage={lessonPercentage}
+              activeLesson={courseProgress.activeLesson}
               {...unit}
             />
           </div>
