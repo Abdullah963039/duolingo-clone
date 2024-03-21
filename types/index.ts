@@ -8,16 +8,17 @@ import {
   challengeProgress,
 } from "@/db/schema";
 
+//! Main_Types
 export type Course = typeof courses.$inferSelect;
-
 export type Unit = typeof units.$inferSelect;
-
 export type Lesson = typeof lessons.$inferSelect;
-
 export type Challenge = typeof challenges.$inferSelect;
-
 export type ChallengeOption = typeof challengeOptions.$inferSelect;
-
 export type ChallengeProgress = typeof challengeProgress.$inferSelect;
-
 export type UserProgress = typeof userProgress.$inferSelect;
+
+//! Used_Types
+export type LessonChallenge = Challenge & {
+  completed: boolean;
+  challengeOptions: ChallengeOption[];
+};
