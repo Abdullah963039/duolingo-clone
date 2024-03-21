@@ -7,6 +7,7 @@ import type { LessonChallenge } from "@/types";
 import { Header } from "./header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
+import { Footer } from "./footer";
 
 interface Props {
   initialLessonId: number;
@@ -15,6 +16,8 @@ interface Props {
   initialPercentage: number;
   userSubscription: any; //!
 }
+
+export type Status = "correct" | "wrong" | "none";
 
 export const Quiz = ({
   initialHearts,
@@ -33,9 +36,17 @@ export const Quiz = ({
 
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
+  const [selectedOption, setSelectedOption] = useState<number | undefined>();
+  const [status, setStatus] = useState<Status>("none");
 
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge.challengeOptions ?? [];
+
+  const onSelect = (id: number) => {
+    if (status !== "none") return;
+
+    setSelectedOption(id);
+  };
 
   const title =
     currentChallenge.type === "ASSIST"
@@ -61,9 +72,9 @@ export const Quiz = ({
               )}
               <Challenge
                 options={options}
-                onSelect={() => {}}
-                status="none"
-                selectedOption={undefined}
+                onSelect={onSelect}
+                status={status}
+                selectedOption={selectedOption}
                 disabled={false}
                 type={currentChallenge.type}
               />
@@ -71,6 +82,7 @@ export const Quiz = ({
           </div>
         </div>
       </div>
+      <Footer disabled={!selectedOption} status={status} onCheck={() => {}} />
     </>
   );
 };
