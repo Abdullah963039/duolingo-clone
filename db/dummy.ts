@@ -53,9 +53,24 @@ const CHALLENGES: Challenge[] = [
     order: 1,
     question: `Which one of these is the "the man"?`,
   },
+  {
+    id: 2,
+    lessonId: 1, // Nouns
+    type: "ASSIST",
+    order: 2,
+    question: `"the man"`,
+  },
+  {
+    id: 3,
+    lessonId: 1, // Nouns
+    type: "SELECT",
+    order: 3,
+    question: `Which one of these is "the robot"?`,
+  },
 ];
 
 const CHALLENGE_OPTIONS: ChallengeOption[] = [
+  // ! First challenge
   {
     id: 1,
     challengeId: 1,
@@ -77,6 +92,58 @@ const CHALLENGE_OPTIONS: ChallengeOption[] = [
     challengeId: 1,
     imageSrc: "/robot.svg",
     correct: false,
+    text: "el robot",
+    audioSrc: "/es_robot.mp3",
+  },
+
+  // ! Second challenge
+  {
+    id: 4,
+    challengeId: 2,
+    imageSrc: null,
+    correct: true,
+    text: "el hombre",
+    audioSrc: "/es_man.mp3",
+  },
+  {
+    id: 5,
+    challengeId: 2,
+    imageSrc: null,
+    correct: false,
+    text: "la mujer",
+    audioSrc: "/es_woman.mp3",
+  },
+  {
+    id: 6,
+    challengeId: 2,
+    imageSrc: null,
+    correct: false,
+    text: "el robot",
+    audioSrc: "/es_robot.mp3",
+  },
+
+  // ! Third challenge
+  {
+    id: 7,
+    challengeId: 3,
+    imageSrc: "/man.svg",
+    correct: false,
+    text: "el hombre",
+    audioSrc: "/es_man.mp3",
+  },
+  {
+    id: 8,
+    challengeId: 3,
+    imageSrc: "/woman.svg",
+    correct: false,
+    text: "la mujer",
+    audioSrc: "/es_woman.mp3",
+  },
+  {
+    id: 9,
+    challengeId: 3,
+    imageSrc: "/robot.svg",
+    correct: true,
     text: "el robot",
     audioSrc: "/es_robot.mp3",
   },
