@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { useKey, useMedia } from "react-use";
 import { CheckCircle, XCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -11,10 +11,15 @@ interface Props {
   disabled?: boolean;
   status: Status | "completed";
   onCheck: () => void;
-  lessonId?: boolean;
+  lessonId?: number;
 }
 
 export const Footer = ({ onCheck, status, disabled, lessonId }: Props) => {
+  const router = useRouter();
+  const onClick = () => {
+    router.push(`/learn/${lessonId}`);
+    router.refresh();
+  };
   useKey("Enter", onCheck, {}, [onCheck]);
   const isMobile = useMedia("(max-width: 1024px)");
 
@@ -40,8 +45,8 @@ export const Footer = ({ onCheck, status, disabled, lessonId }: Props) => {
           </div>
         )}
         {status === "completed" && (
-          <Button size={isMobile ? "sm" : "lg"} asChild>
-            <Link href={`/learn/${lessonId}`}>Practice again</Link>
+          <Button size={isMobile ? "sm" : "lg"} onClick={onClick}>
+            Practice again
           </Button>
         )}
         <Button

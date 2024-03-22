@@ -67,10 +67,31 @@ const CHALLENGES: Challenge[] = [
     order: 3,
     question: `Which one of these is "the robot"?`,
   },
+  {
+    id: 4,
+    lessonId: 2, // Verbs
+    type: "SELECT",
+    order: 3,
+    question: `Which one of these is "the robot"?`,
+  },
+  {
+    id: 5,
+    lessonId: 2, // Verbs
+    type: "SELECT",
+    order: 3,
+    question: `Which one of these is "the robot"?`,
+  },
+  {
+    id: 6,
+    lessonId: 2, // Verbs
+    type: "SELECT",
+    order: 3,
+    question: `Which one of these is "the robot"?`,
+  },
 ];
 
 const CHALLENGE_OPTIONS: ChallengeOption[] = [
-  // ! First challenge
+  // ! First challenge - 1st lesson
   {
     id: 1,
     challengeId: 1,
@@ -96,7 +117,7 @@ const CHALLENGE_OPTIONS: ChallengeOption[] = [
     audioSrc: "/es_robot.mp3",
   },
 
-  // ! Second challenge
+  // ! Second challenge - 1st lesson
   {
     id: 4,
     challengeId: 2,
@@ -122,7 +143,7 @@ const CHALLENGE_OPTIONS: ChallengeOption[] = [
     audioSrc: "/es_robot.mp3",
   },
 
-  // ! Third challenge
+  // ! Third challenge - 1st lesson
   {
     id: 7,
     challengeId: 3,
