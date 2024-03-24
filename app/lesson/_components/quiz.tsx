@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
 
-import type { LessonChallenge } from "@/types";
+import type { LessonChallenge, UserSubscription } from "@/types";
 import { upsertChallengeProgress } from "@/actions/challenge-progress";
 import { useHeartsModal } from "@/store/use-hearts-modal";
 import { usePracticeModal } from "@/store/use-practice-modal";
@@ -24,7 +24,7 @@ interface Props {
   initialLessonChallenges: LessonChallenge[];
   initialHearts: number;
   initialPercentage: number;
-  userSubscription: any; //!
+  userSubscription: (UserSubscription & { isActive: boolean }) | null;
 }
 
 export type Status = "correct" | "wrong" | "none";

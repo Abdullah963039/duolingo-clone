@@ -6,11 +6,10 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
 import { getUserProgress, getUserSubscription } from "@/db/queries";
 import { Promo } from "@/components/promo";
-import { Quests } from "@/components/quests";
+import { QuestItem } from "@/components/quest-item";
+import { QUESTS } from "@/constants";
 
-import { Items } from "./_components/items";
-
-export default async function ShopPage() {
+export default async function QuestsPage() {
   const userProgressPromise = getUserProgress();
   const userSubscriptionPromise = getUserSubscription();
 
@@ -35,23 +34,28 @@ export default async function ShopPage() {
           hasActiveSubscription={isPro}
         />
         {!isPro && <Promo />}
-        <Quests points={userProgress.points} />
       </StickyWrapper>
 
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
-          <Image src="/shop.svg" alt="Shop" height={90} width={90} />
+          <Image src="/quests.svg" alt="Quests" height={90} width={90} />
           <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-            Shop
+            Quests
           </h1>
           <p className="text-muted-foreground text-center text-lg mb-6">
-            Spend your points on cool stuff
+            Complete quests by earning points.
           </p>
-          <Items
-            hearts={userProgress.hearts}
-            points={userProgress.points}
-            hasActiveSubscription={isPro}
-          />
+
+          <ul className="w-full">
+            {QUESTS.map((quest) => (
+              <QuestItem
+                key={quest.title}
+                points={userProgress.points}
+                {...quest}
+                className="border-t-2"
+              />
+            ))}
+          </ul>
         </div>
       </FeedWrapper>
     </div>

@@ -4,19 +4,26 @@ import { redirect } from "next/navigation";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
-import { getUserProgress, getUserSubscription } from "@/db/queries";
+import {
+  getTopTenUsers,
+  getUserProgress,
+  getUserSubscription,
+} from "@/db/queries";
+import { Separator } from "@/components/ui/separator";
 import { Promo } from "@/components/promo";
 import { Quests } from "@/components/quests";
 
-import { Items } from "./_components/items";
+import { UserItem } from "./_components/user-item";
 
-export default async function ShopPage() {
+export default async function LeaderboardPage() {
   const userProgressPromise = getUserProgress();
   const userSubscriptionPromise = getUserSubscription();
+  const topTenUsersPromise = getTopTenUsers();
 
-  const [userProgress, userSubscription] = await Promise.all([
+  const [userProgress, userSubscription, topTenUsers] = await Promise.all([
     userProgressPromise,
     userSubscriptionPromise,
+    topTenUsersPromise,
   ]);
 
   const isPro = !!userSubscription?.isActive;
@@ -40,18 +47,24 @@ export default async function ShopPage() {
 
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
-          <Image src="/shop.svg" alt="Shop" height={90} width={90} />
+          <Image
+            src="/leaderboard.svg"
+            alt="Leaderboard"
+            height={90}
+            width={90}
+          />
           <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-            Shop
+            Leaderboard
           </h1>
           <p className="text-muted-foreground text-center text-lg mb-6">
-            Spend your points on cool stuff
+            See where you stand among other learners in the community.
           </p>
-          <Items
-            hearts={userProgress.hearts}
-            points={userProgress.points}
-            hasActiveSubscription={isPro}
-          />
+
+          <Separator className="mb-4 h-0.5 rounded-full" />
+
+          {topTenUsers.map((userProgress, idx) => (
+            <UserItem key={userProgress.userId} index={idx} {...userProgress} />
+          ))}
         </div>
       </FeedWrapper>
     </div>
