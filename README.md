@@ -1,3 +1,12 @@
+# Doulingo App
+
+ERD:
+
+![ERDiagram](/public/erd.png)
+
+> [!NOTE]
+> For more useful and amazing projects you can visit [Code with antnio channel](https://www.youtube.com/@codewithantonio).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -19,6 +28,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## .env
+
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+STRIPE_API_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_APP_URL=
+ADMIN_USER_ID=
+```
 
 ## Learn More
 

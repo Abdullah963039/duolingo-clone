@@ -1,7 +1,5 @@
-//! DEVELOPMENT
-
 import "dotenv/config";
-import postgres from "postgres";
+import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/postgres-js";
 
 import * as schema from "@/db/schema";
@@ -13,8 +11,9 @@ import {
   CHALLENGE_OPTIONS,
 } from "@/db/dummy";
 
-const sql = postgres(process.env.DATABASE_URL!);
+const sql = neon(process.env.DATABASE_URL!);
 
+// @ts-ignore
 const db = drizzle(sql, { schema });
 
 const main = async () => {
